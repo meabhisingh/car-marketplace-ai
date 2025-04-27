@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ImageKitProvider } from "@imagekit/next";
+import { ThemeProvider } from "next-themes";
+import { Header } from "@/components/layout/header";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +32,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider attribute={"class"}>
+          <ImageKitProvider urlEndpoint="https://ik.imagekit.io/6packprogrammer">
+            <Header />
+            {children}
+            <Toaster />
+          </ImageKitProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
